@@ -11,6 +11,7 @@ const server = express()
 	.listen(port, () => console.log('Server started on port ', port));
 
 const io = socketIO(server);
+let users =  [];                                  
 
 io.on('connection', (socket) => {
 	console.log('A new user joined');
@@ -21,10 +22,17 @@ io.on('connection', (socket) => {
 function onConnection(socket) {
 	socket.on('username', (username) => {
 		console.log('Player name:', username);
+		socket.username = username;
+		users.push(socket);
+		sendUsers();
 	});
 
 	socket.on('disconnect', () => {
 		console.log('Player left the game');
+		users.filter(user => {
+			return user !== socket;
+		});
+		sendUsers();
 
 	});
 
@@ -32,3 +40,15 @@ function onConnection(socket) {
 		socket.broadcast.emit('line', data);
 	});
 }
+
+function sendUsers () {
+	io.emit('users', users.map(usr => {
+		return user.username;
+	}));
+}
+
+
+
+
+
+
