@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pictionary B3G</title>
+</head>
+<body>
+	<h1>Hello world</h1>
+
+	<script src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+		const socket = io();
+		const username =  prompt('Telle me your name');
+
+		socket.emit('username', username);
+	</script>
+
+</body>
+</html>

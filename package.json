@@ -1,0 +1,23 @@
+{
+  "name": "pictionary-b3g",
+  "version": "1.0.0",
+  "description": "Un exercice de pictionary",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthuranst/pictionary-b3g.git"
+  },
+  "author": "arthur ansotte",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arthuranst/pictionary-b3g/issues"
+  },
+  "homepage": "https://github.com/arthuranst/pictionary-b3g#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
