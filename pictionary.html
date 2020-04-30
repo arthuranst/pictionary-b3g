@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Pictionary B3G</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictionary Game</title>
+    <style>
+        canvas {
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
 <body>
-	<h1>Hello world</h1>
+    <h1>Hello world</h1>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        const username = prompt('Tell me your name');
+        socket.emit('username', username);
+        function setup () {
+            createCanvas(500,500);
+        }
+        function mouseDragged () {
+            line(mouseX, mouseY, pmouseX, pmouseY);
 
-	<script src="/socket.io/socket.io.js"></script>
+            socket.emit('line', {
+            	'mouseX': mouseX, 
+            	'mouseY': mouseY, 
+            	'pmouseX': pmouseX, 
+            	'pmouseY': pmouseY
+            });
+        }
 
-	<script type="text/javascript">
-		const socket = io();
-		const username =  prompt('Telle me your name');
-
-		socket.emit('username', username);
-	</script>
-
+        socket.on('line', data => {
+        	line(data.mouseX, data.mouseY, data.pmouseX, data.pmouseY)
+        });
+    </script>
 </body>
 </html>

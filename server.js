@@ -27,4 +27,8 @@ function onConnection(socket) {
 		console.log('Player left the game');
 
 	});
+
+	socket.on('line', data => {
+		socket.broadcast.emit('line', data);
+	});
 }
